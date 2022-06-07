@@ -1,0 +1,178 @@
+class Heroe:
+    def _init_(self):
+        self.nombre ="Batman"
+        self.fuerzaPatada = 560
+        self.fuerzaPuno = 320
+
+    def atacar(self):
+        print("Atacando")
+
+
+
+
+
+class Heroe:
+    def _init_(self, nombre, fuerza1, fuerza2):
+        self.nombre = nombre
+        self.fuerzaPatada = fuerza1
+        self.fuerzaPuno = fuerza2
+
+    def atacar(self):
+        prin("Atacando")
+
+batman= Heroe("Juan", 45, 60)
+
+
+from os import system
+
+productos = []
+
+salir = False
+while salir == False:
+     print('1. Registrar producto (nombre y precio)')
+     print('2. Mostrar listado de productos')
+     print('3. Buscar y cambiar el nombre de un producto')
+     print('4. Buscar y eliminar producto')
+     seguir = False
+     opcion = int(input('Opción: '))
+     if 0 <= opcion <= 4:
+         seguir = True
+
+     if seguir == True:
+         if opcion == 0:
+             salir = True
+             print('Fin del Programa')
+
+         elif opcion == 1:
+             producto = input('Nombre del producto y precio: ')
+             if producto in productos:
+                 print('El producto ya fue registrado anteriormente')
+             else:
+                 productos.append(producto)
+                 print('Producto agregado de manera exitosa')
+
+         if opcion == 2:
+             if len(productos) > 0:
+                 for i in productos:
+                     indice = productos.index(i)
+                     print(indice + 1, '.', productos[indice])
+                 system('pause')
+
+         if opcion == 3:
+             busqueda = input('Buscar: ')
+             cambio = False
+             for i in productos:
+                 if i == busqueda:
+                     nuevoNombre = input('Nombre nuevo: ')
+                     indice = productos.index(i)
+                     productos[indice] = nuevoNombre
+                     cambio = True
+
+             if cambio == True:
+                 print('Cambio exitoso')
+             else:
+                 print('Producto no encontrado')
+
+         if opcion == 4:
+             busqueda = input('Buscar: ')
+             eliminar = False
+             for i in productos:
+                 if i == busqueda:
+                     producto = productos.index(i)
+                     productos.pop(producto)
+                     eliminar = True
+
+             if eliminar == True:
+                 print('El producto se eliminó de manera exitosa')
+             else:
+                 print('Producto no encontrado')
+
+
+
+'''.  Construir un programa para calcular un programa CALCULADORA que permita calcular
+SUMA
+RESTA
+MULTIPLICACIÓN
+DIVISIÓN
+
+'''
+
+n1 = float(input("Introduce tu primer número: "))
+n2 = float(input("Introduce tu segundo número: "))
+
+opcion = 0
+
+while True:
+    print("""
+    Elige las opciones:
+
+    1) Sumar los dos números
+    2) Restar los dos números
+    3) Multiplicar los dos números
+    4) Cambiar los números elegidos
+    5) Apagar calculadora
+    """)
+    opcion = int(input("Elige una opción: "))
+
+    if opcion == 1:
+        print(" ")
+        print("RESULTADO: La suma de", n1, "+", n2, "es igual a", n1 + n2)
+    elif opcion == 2:
+        print(" ")
+        print("RESULTADO: La resta de", n1, "-", n2, "es igual a", n1 - n2)
+    elif opcion == 3:
+        print(" ")
+        print("RESULTADO: El producto de", n1, "*", n2, "es igual a", n1 * n2)
+    elif opcion == 4:
+        n1 = float(input("Introduce tu primer número: "))
+        n2 = float(input("Introduce tu segundo número: "))
+    elif opcion == 5:
+        break
+    else:
+        print("Opción incorrecta")
+
+
+'''.  3. El banco de hierro de la isla de Braavos necesita de sus servicios para programar un software que permita:
+
+Almacenar información de un cliente (nombre,apellido,cedula)
+Almacenar información de la cuenta (numeroCuenta, saldo)
+Se debe permitir consultar saldo en cualquier momento
+Se debe permitir ingresar o retirar dinero  cuando se desee
+
+'''
+
+Clientes = []
+numCuentas=0
+
+def crearCuenta(clientes,numCuentas):
+    nombre = input('Introduzca nombre y apellido: ')
+    ced = input('Introduzca numero de documento: ')
+    cuenta = {'nombre y apellido': nombre, 'cedula': ced, 'cuenta':
+        {'saldo': 0,'numeroCuenta': numCuentas}}
+    clientes.append(cuenta)
+    numCuentas += 1
+    print("Cuenta creada")
+    input("Pulse Enter para continuar...")
+    return clientes, numCuentas
+
+def hacerIngreso(clientes):
+    if len(clientes) >0:
+        cuenta = input('Por favor indique el numero de cuenta al que desea hacer el ingreso:')
+        cantidad = input('Por favor indique la cantidad a ingresar:')
+        saldoActual = clientes[int(cuenta)]['cuenta']['saldo']
+        clientes[int(cuenta)]['cuenta']['saldo'] = saldoActual + int(cantidad)
+        print('Se ha realizado el ingreso')
+    else:
+        print("no existen cuentas")
+    input("Pulse Enter para continuar...")
+
+def visualizarCuentas(clientes):
+    if len(clientes) >0:
+        for cliente in clientes:
+            print('Nombre: ' + cliente['nombre'])
+            print('Apellido: ' + cliente['apellido'])
+            print('Número de Cuenta: ' + str(cliente['cuenta']['numeroCuenta']))
+            print('\n')
+    else:
+        print('No existen cuentas para listar')
+    input("Pulse Enter para continuar...")
