@@ -143,38 +143,47 @@ Se debe permitir ingresar o retirar dinero  cuando se desee
 
 '''
 
-Clientes = []
-numCuentas=0
+def informacion_personal():
+    # Crea un dictionario con nombre, apellido y cedula de Keys
+    user_info = dict.fromkeys(["Nombre: ", "Apellido: ", "Cedula: ", "Cuenta: "])
 
-def crearCuenta(clientes,numCuentas):
-    nombre = input('Introduzca nombre y apellido: ')
-    ced = input('Introduzca numero de documento: ')
-    cuenta = {'nombre y apellido': nombre, 'cedula': ced, 'cuenta':
-        {'saldo': 0,'numeroCuenta': numCuentas}}
-    clientes.append(cuenta)
-    numCuentas += 1
-    print("Cuenta creada")
-    input("Pulse Enter para continuar...")
-    return clientes, numCuentas
+    nombre = input("Ingrese su nombre: ")
+    apellido = input("Ingrese su apellido: ")
+    cedula = input("Ingrese su cedula: ")
+    cuenta = input("Ingrese su numero de cuenta: ")
 
-def hacerIngreso(clientes):
-    if len(clientes) >0:
-        cuenta = input('Por favor indique el numero de cuenta al que desea hacer el ingreso:')
-        cantidad = input('Por favor indique la cantidad a ingresar:')
-        saldoActual = clientes[int(cuenta)]['cuenta']['saldo']
-        clientes[int(cuenta)]['cuenta']['saldo'] = saldoActual + int(cantidad)
-        print('Se ha realizado el ingreso')
+    # Añade los inputs al dictionario
+    user_info["Nombre: "] = nombre
+    user_info["Apellido: "] = apellido
+    user_info["Cedula: "] = cedula
+    user_info["Cuenta: "] = cuenta
+
+    return user_info
+
+
+
+
+def consultar_retirar():
+    saldo_inicial = 0
+    numero_cuenta_usuario = informacion_personal()["Cuenta: "]
+    ingreso_cuenta = input("Por favor ingrese su cuenta: ")
+    if ingreso_cuenta == numero_cuenta_usuario:
+        while True:
+            input_usuario = input("Digite 1 para consultar su saldo, digite 2 para ingresar dinero, digite 3 para retirar dinero, digite 4 para cerrar sesión. ")
+            if input_usuario == "1":
+                print(saldo_inicial)
+            elif input_usuario == "2":
+                ingresar_dinero = input("Digite la cantidad de dinero a ingresar: ")
+                saldo_inicial += int(ingresar_dinero)
+            elif input_usuario == "3":
+                retirar_dinero = input("Digite la cantidad de dinero a retirar: ")
+                if saldo_inicial - int(retirar_dinero) < 0:
+                    print("No tiene suficiente saldo para realizar este retiro.")
+                else:
+                    saldo_inicial-= int(retirar_dinero)
+            elif input_usuario == "4":
+                break
     else:
-        print("no existen cuentas")
-    input("Pulse Enter para continuar...")
+        print("La cuenta digitada no existe.")
 
-def visualizarCuentas(clientes):
-    if len(clientes) >0:
-        for cliente in clientes:
-            print('Nombre: ' + cliente['nombre'])
-            print('Apellido: ' + cliente['apellido'])
-            print('Número de Cuenta: ' + str(cliente['cuenta']['numeroCuenta']))
-            print('\n')
-    else:
-        print('No existen cuentas para listar')
-    input("Pulse Enter para continuar...")
+consultar_retirar()
